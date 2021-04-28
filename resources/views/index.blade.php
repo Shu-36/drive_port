@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -12,7 +15,9 @@
        
     </head>
     <body>
-        
+        <div class="create">
+           [<a href="/posts/create">新規作成</a>]
+       </div>
         //検索機能
         //こだわり検索（別のbladeで/serchを作成)
        <div class='posts'>
@@ -24,6 +29,7 @@
                  </div>
            @endforeach
        </div>
+       
        <div class='paginete'>
            {{ $posts->links('vendor.pagination.default') }}
        </div>

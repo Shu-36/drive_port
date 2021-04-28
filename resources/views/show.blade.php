@@ -12,6 +12,8 @@
        
     </head>
     <body>
+        //次にすることはPost.phpでメソッドを入れてuser_idのキーとのリレーション（PostControllerじゃないのはPost.phpをPostControllerが継承しているから）
+        {{ $post }}
         <h1 class="title">
             {{ $post->title }}
         </h1>
