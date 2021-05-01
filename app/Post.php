@@ -17,12 +17,9 @@ class Post extends Model
     {
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
-    public function users()
+    public function user()
     {
-        return $this->hasOne('App\User', 'foreign_key');
-    }
-    public function post()
-    {
-        return $this->belongsTo('App\Post');
+        return $this->belongTo('App\User');
+        
     }
 }

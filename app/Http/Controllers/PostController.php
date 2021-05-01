@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+  //'posts'は複数の記事を扱うもの、'post'は単体の記事に対して
     public function index(Post $post)
     {
       return view ('index')->with(['posts'=>$post->getPaginateBylimit()]);
@@ -29,6 +30,18 @@ class PostController extends Controller
       $input['user_id'] = auth()->user()->id;
       $post->fill($input)->save();
       return redirect('/posts/' . $post->id);
+  }
+  public function edit(Post $post)
+  {
+    return view('edit')->with(['post' => $post]);
+  }
+  public function update(Request $request, Post $post)
+  {
+    $input_post = $request['post'];
+    $input_post['user_id'] = auth()->user()->id;
+    $post->fill($input_post)->save();
+    return redirect('/posts/' . $post->id);
+    
   }
   
 }

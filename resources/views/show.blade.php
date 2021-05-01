@@ -23,6 +23,7 @@
                 {{ $post->body }}
             </div>
         </div>
+        <p class="edit">[<a href="/posts/{{ $post->id }}/edit">編集</a>]</p>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
