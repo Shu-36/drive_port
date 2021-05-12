@@ -22,6 +22,18 @@
                <h2>本文</h2>
                <textarea name="post[body]" placeholder="おすすめの理由、周辺おすすめ駐車場など"></textarea>
            </div>
+           <select
+             id="category_id"
+             name="category_id"
+             class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
+             //oldグローバルヘルパ関数は指定した文字列の入力がない時nullを返す
+             value="{{ old('category_id') }}"
+            >
+             
+               @foreach($categories as $id => $name)
+                <option value="{{ $id }}">{{ $name }}</option>
+               @endforeach
+           </select>
            <input type="submit" value="store">
        </form>
       <div class="back">[<a href="/posts">戻る</a>]</div>

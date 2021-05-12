@@ -25,6 +25,19 @@
                <h2>本文</h2>
                <textarea type="text" name="post[body]" >{{ $post->body }}</textarea>
            </div>
+           <select
+            id="category_id"
+            name="category_id"
+            class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
+            >
+               @foreach($categories as $id => $name)
+                <option value="{{ $id }}"
+                    @if ($post->category_id == $id)
+                      selected
+                    @endif
+                >{{ $name }}</option>
+               @endforeach
+           </select>
          <input type="submit" value="保存">
        </form>
       </div> 

@@ -29,7 +29,6 @@
                  </div>
            @endforeach
        </div>
-       
        <div class='paginete'>
            {{ $posts->links('vendor.pagination.default') }}
        </div>
