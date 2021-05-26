@@ -16,11 +16,12 @@ class CreateFavoritesTable extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
             //unsignedで正の数を指定
+            $table->bigInteger('post_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('favorite_id')->unsigned();
             //foreignで今のマイグレーション、referencesで参照したいものを決め、onでどのテーブルを参照するか
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('favorite_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->softDeletes();
             $table->timestamps();
             

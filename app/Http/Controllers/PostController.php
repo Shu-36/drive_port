@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
   //'posts'は複数の記事を扱うもの、'post'は単体の記事に対して
-    public function index(Post $post)
-    {
-      //''=>$~でモデルクラスの変数の受け渡し
-      //view側では通常の変数名でok
-      return view ('index')->with(['posts'=>$post->getPaginateBylimit()]);
+    public function index(Post $post, Request $request)
+   {
+     //検索
+     if($request['search']){
+        $search = $request['search'];
+        $posts = Post::orderBy('created_at', 'asc')->where('title', 'LIKE', "%{$search}%")->orWhere('body','LIKE', "%{$search}%")->paginate(8);
+     }else{
+       $posts = Post::paginate(8);
+     }
+      return view ('index')->with(['posts' => $posts]);
+      
     }
+    
   public function show(Post $post)
   {
     //'post'は連想配列の考え方（この場合はshow.blade.phpで使われるときのキー名を指定している。）
