@@ -39,4 +39,5 @@
            {{ $posts->links('vendor.pagination.default') }}
        </div>
     </body>
+    
 </html>

@@ -120,6 +120,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
+    'google_key' => env('GOOGLE_MAP_APIKEY'),
 
     'cipher' => 'AES-256-CBC',
 
