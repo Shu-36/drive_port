@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Post, App\Category;
 use App\Users;
 use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -26,21 +28,31 @@ class PostController extends Controller
     //'post'は連想配列の考え方（この場合はshow.blade.phpで使われるときのキー名を指定している。）
       return view ('show')->with(['post'=>$post]);
   }
-  public function create(Category $category)
+  public function create(Category $category, Post $post)
   {
       //prependメソッドで配列に任意の項目の選択をできるようにする
+      $post = Post::all();
       $categories = $category->getLists()->prepend('ドライブシーンを選択','');
-      return view('create')->with(['categories' => $categories]);
+      return view('create')->with(['categories' => $categories, 'post'=>$post]);
   }
+  
   public function store(Request $request, Post $post)
   {
       //$request['post']はcreateで作ったformのnameを参照
       //基本的にはrequestは入力情報についてのことを書く。
-      $input = $request['post'];
+      
+      // $input = $request['post'];
       //'user_id'をnameを参考にできないが保存したいのでこのように書き表せる。
-      $input['user_id'] = auth()->user()->id;
-      $post->fill($input)->save();
-      return redirect('/posts/' . $post->id);
+      // $input['user_id'] = auth()->user()->id;
+      // $data = ['post'=>$request->input('post')
+              // 'user_id'=>$request->auth()->user()->id
+      // ];
+      $data = $request['post'];
+      $data['user_id'] = auth()->user()->id;
+      // dd($post);
+      $post->fill($data)->save();
+      
+      return redirect()->route('post.show', $post->id);
   }
   public function edit($id)
   {

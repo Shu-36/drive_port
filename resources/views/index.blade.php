@@ -23,14 +23,16 @@
       <input type="submit" value="検索" class="btn btn-info">
   </form> 
        <div class="create">
-           [<a href="/posts/create">新規作成</a>]
+           <a href="/posts/create"><button type="button" class="btn btn-primary btn-sm">新規作成</button></a>
+           <!--<button type="button" class="btn btn-primary btn-sm"><a href="/posts/create">新規作成</a></button>-->
+        </div>
        <div class='posts'>
            @foreach($posts as $post)
                  <div class='post'>
-                     <h2><a href="posts/{{ $post->id }}">{{ $post->title }}</a></h2>
-                     <p class='body'>{{ $post->body }}</p>
-                     <p class='category'>{{ $post->category->name }}</p>
-                     <p class='created_at'>{{ $post->created_at }}</p>
+                    タイトル <h2><a href="posts/{{ $post->id }}">{{ $post->title }}</a></h2>
+                    本文　 <p class='body'>{{ $post->body }}</p>
+                     カテゴリー<p class='category'>{{ $post->category->name }}</p>
+                    作成日 <p class='created_at'>{{ $post->created_at }}</p>
                      
                  </div>
            @endforeach

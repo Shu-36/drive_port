@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>drive</title>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
       
@@ -13,7 +12,7 @@
        
     </head>
     <body>
-       <form>
+       <form action = "{{ route('post.store') }}" method ="POST">
            {{ csrf_field() }}
            <div class="title">
                <h2>タイトル</h2>
@@ -33,38 +32,13 @@
                @foreach($categories as $id => $name)
                 <option value="{{ $id }}">{{ $name }}</option>
                @endforeach
-           </select>
-          
-           <input type="submit" value="store">
-            
+              <!--<input type="submit" value="保存する">-->
+        </select>
+            <button type="submit">登録</button>
        </form>
-        <div id="maps"style="width:600px; height:200px"></div>
-            <div class="address">
-               <input id="address" type ="text">
-               <button id="search">変換</button> 
-            </div>
-      <div class="back">[<a href="/posts">戻る</a>]</div>
+        
+      <div class="back">[<a href="{{ route('post.index') }}">戻る</a>]</div>
       
     </body>
-     <script>
-          var search = document.getElementById('search');
-          search.onclick = function(){
-              var address = document.getElementById('address');
-              var addressInput = address.value;
-          };
-          　 
-          function initMap(){
-              var map = document.getElementById('maps');
-              console.log(map);
-              let tokyoTower = {lat: 35.6585769, lng: 139.7454506};
-              opt = {
-                    zoom: 13, 
-                    center: tokyoTower, 
-                };
-                mapObject = new google.maps.Map(map);
-                
-          }
-      </script>
-       <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key={{ config('app.google_key') }}&callback=initMap" async defer>
-	   </script>
+     
 </html>
