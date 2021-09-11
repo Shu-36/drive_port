@@ -18,10 +18,16 @@
                <h2>タイトル</h2>
                <input type="text" name="post[title]" placeholder="タイトルを入力してください">
            </div>
+           @if ($errors->has('title'))
+              <p class="">{{$errors->first('title')}}</li>
+            @endif
            <div class="body">
                <h2>本文</h2>
                <textarea name="post[body]" placeholder="おすすめの理由、周辺おすすめ駐車場など"></textarea>
            </div>
+           @if ($errors->has('body'))
+              <li>{{$errors->first('body')}}</li>
+            @endif
           <select
              id="category_id"
              name="post[category_id]"
@@ -34,7 +40,11 @@
                @endforeach
               <!--<input type="submit" value="保存する">-->
         </select>
-            <button type="submit">登録</button>
+        @if ($errors->has('category_id'))
+              <li>{{$errors->first('category_id')}}</li>
+        @endif
+        
+      <button type="submit" class="btn btn-primary">登録する</button>
        </form>
         
       <div class="back">[<a href="{{ route('post.index') }}">戻る</a>]</div>

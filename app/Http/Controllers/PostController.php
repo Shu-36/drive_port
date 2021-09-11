@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Post, App\Category;
 use App\Users;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\StoreBlogPost;
 
 class PostController extends Controller
 {
@@ -36,7 +36,7 @@ class PostController extends Controller
       return view('create')->with(['categories' => $categories, 'post'=>$post]);
   }
   
-  public function store(Request $request, Post $post)
+  public function store(StoreBlogPost $request, Post $post)
   {
       //$request['post']はcreateで作ったformのnameを参照
       //基本的にはrequestは入力情報についてのことを書く。
