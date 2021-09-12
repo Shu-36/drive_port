@@ -24,9 +24,18 @@ class StoreBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|min:10|max20',
-            'body'=>'required|min:20|max:500',
+            'title'=>'required|integer',
+            'body'=>'required|string',
             'category_id'=>'required'
         ];
     }
+    
+   public function attributes()
+{
+    return [
+        'title' => 'タイトル',
+        'body' => '本文',
+        'category_id' => 'カテゴリー',
+    ];
+}
 }

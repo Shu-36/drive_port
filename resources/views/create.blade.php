@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -12,22 +16,28 @@
        
     </head>
     <body>
+       <div class="container mt-4">
+        <div class="border p-4">
+        <h1 class="h4 mb-4 font-weight-bold">新規作成</h1>
+        
+         <fieldset class="mb-4">
        <form action = "{{ route('post.store') }}" method ="POST">
            {{ csrf_field() }}
-           <div class="title">
-               <h2>タイトル</h2>
-               <input type="text" name="post[title]" placeholder="タイトルを入力してください">
-           </div>
+           
+     <div class="form-group">
+         <h2 class="mt-4"><label for="subject">タイトル </label></h2>
+               <input class="form-control" type="text" name="post[title]" placeholder="タイトルを入力してください" value="{{ old('title') }}">
            @if ($errors->has('title'))
               <p class="">{{$errors->first('title')}}</li>
             @endif
-           <div class="body">
-               <h2>本文</h2>
-               <textarea name="post[body]" placeholder="おすすめの理由、周辺おすすめ駐車場など"></textarea>
-           </div>
+      <div class="form-group">
+         <h2 class="mt-4"><label for="subject">本文 </label></h2>
+               <textarea class="form-control" name="post[body]" placeholder="おすすめの理由、周辺おすすめ駐車場など" value="{{ old('body') }}"></textarea>
            @if ($errors->has('body'))
               <li>{{$errors->first('body')}}</li>
             @endif
+     <div class="form-group">
+         <h2 class="mt-4"><label for="subject">カテゴリー </label></h2>
           <select
              id="category_id"
              name="post[category_id]"
@@ -38,7 +48,6 @@
                @foreach($categories as $id => $name)
                 <option value="{{ $id }}">{{ $name }}</option>
                @endforeach
-              <!--<input type="submit" value="保存する">-->
         </select>
         @if ($errors->has('category_id'))
               <li>{{$errors->first('category_id')}}</li>
@@ -47,7 +56,13 @@
       <button type="submit" class="btn btn-primary">登録する</button>
        </form>
         
-      <div class="back">[<a href="{{ route('post.index') }}">戻る</a>]</div>
+    <a href="{{ route('post.index') }}">
+        <button type="button" class="btn btn-secondary">戻る</button>
+    </a>
+    </fildset>
+    </div>
+    </div>
+    
       
     </body>
      

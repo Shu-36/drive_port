@@ -17,7 +17,19 @@ class PostController extends Controller
         $search = $request['search'];
         $posts = Post::orderBy('created_at', 'asc')->where('title', 'LIKE', "%{$search}%")->orWhere('body','LIKE', "%{$search}%")->paginate(8);
      }else{
-       $posts = Post::paginate(8);
+      // $posts = Post::paginate(8);
+       $posts = \DB::table('posts')
+                  ->join('categories', 'categories.id', '=', 'posts.category_id')
+                   ->join('users', 'users.id', '=', 'posts.user_id')
+                   ->select([
+                     'posts.id as post_id',
+                     'posts.title',
+                     'posts.body',
+                     'posts.created_at as post_created_at',
+                     'users.name as user_name',
+                     'categories.name as category_name',
+                   ])
+                   ->paginate('8');
      }
       return view ('index')->with(['posts' => $posts]);
       
